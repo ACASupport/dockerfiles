@@ -19,7 +19,7 @@ ssh-keygen -b 2048 -t rsa -f openssh-server/key -N ""
 echo "lezen van public key in variabele voor starten container"
 publickey=$(cat openssh-server/key.pub)
 echo "Starten van openssh_test docker container voor test"
-docker run -d --name=openssh_test --network=nasi -e PUID=1000 -e PGID=1000 -e TZ=europe/amsterdam -e PUBLIC_KEY="$publickey" -e SUDO_ACCESS=false -e PASSWORD_ACCESS=false -e USER_NAME=test -l traefik.enable=false solipsist01/openssh-server
+docker run -d --name=openssh_test --network=core -e PUID=1000 -e PGID=1000 -e TZ=europe/amsterdam -e PUBLIC_KEY="$publickey" -e SUDO_ACCESS=false -e PASSWORD_ACCESS=false -e USER_NAME=test -l traefik.enable=false acaitsolutions/openssh-server
 echo "wachten op de initialisatie"
 countdown 10
 echo "opzetten SSH connectie met private key authentication"
